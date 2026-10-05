@@ -146,7 +146,6 @@ export const KitchenPage: React.FC = () => {
           (it) =>
             it.flavor_name.toLowerCase().includes(q) ||
             it.size_name.toLowerCase().includes(q) ||
-            (it.free_topping && it.free_topping.toLowerCase().includes(q)) ||
             it.toppings?.some((t) => t.topping_name.toLowerCase().includes(q))
         );
 
@@ -241,21 +240,15 @@ export const KitchenPage: React.FC = () => {
                 <th style={{ width: 110 }}>Priority #</th>
                 <th style={{ width: 150 }}>Customer</th>
                 <th>Bowls & Customizations</th>
-                <th style={{ width: 130 }}>Elapsed Time</th>
                 <th style={{ width: 110 }}>Status</th>
                 <th style={{ width: 160, textAlign: 'center' }}>Action</th>
               </tr>
             </thead>
             <tbody>
               {filteredOrders.map((order) => {
-                const elapsedMins = Math.max(1, dayjs().diff(dayjs(order.created_at), 'minute'));
                 const isReady = order.status === 'ready';
                 const isCompleted = order.status === 'completed';
                 const isInPrep = order.status === 'new' || order.status === 'preparing';
-
-                // SLA Timing classification
-                const isAmber = elapsedMins >= 8 && elapsedMins < 15;
-                const isRed = elapsedMins >= 15;
 
                 return (
                   <tr key={order.id}>
@@ -282,10 +275,7 @@ export const KitchenPage: React.FC = () => {
                     {/* Bowls & Customizations */}
                     <td>
                       {order.items?.map((item, idx) => {
-                        const toppingsText = [
-                          item.free_topping && item.free_topping !== 'None' ? `${item.free_topping} (Free)` : null,
-                          ...(item.toppings?.map((t) => t.topping_name) || []),
-                        ]
+                        const toppingsText = (item.toppings?.map((t) => t.topping_name) || [])
                           .filter(Boolean)
                           .join(', ');
 
@@ -308,19 +298,6 @@ export const KitchenPage: React.FC = () => {
                           Note: {order.notes}
                         </div>
                       )}
-                    </td>
-
-                    {/* Elapsed Time & SLA */}
-                    <td>
-                      <div style={{ fontWeight: 700 }}>
-                        {elapsedMins} min{elapsedMins > 1 ? 's' : ''}
-                      </div>
-                      <Tag
-                        color={isRed ? 'error' : isAmber ? 'warning' : 'success'}
-                        style={{ margin: 0, fontSize: 10, fontWeight: 700 }}
-                      >
-                        {isRed ? 'Overdue (>15m)' : isAmber ? 'Delayed (8-15m)' : 'On Time (<8m)'}
-                      </Tag>
                     </td>
 
                     {/* Status */}

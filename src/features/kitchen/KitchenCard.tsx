@@ -142,13 +142,6 @@ export const KitchenCard: React.FC<KitchenCardProps> = ({
               <span className="fc-bowl-flavor-text">{item.flavor_name}</span>
             </div>
 
-            {/* Free topping pill */}
-            {item.free_topping && item.free_topping !== 'None' && (
-              <span className="fc-bowl-free-pill">
-                🌿 {item.free_topping}
-              </span>
-            )}
-
             {/* Paid toppings */}
             {item.toppings && item.toppings.length > 0 && (
               <span className="fc-bowl-paid-toppings">

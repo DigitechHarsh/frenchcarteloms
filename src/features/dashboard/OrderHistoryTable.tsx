@@ -67,7 +67,7 @@ export const OrderHistoryTable: React.FC<OrderHistoryTableProps> = ({
       minWidth: 220,
       valueGetter: (params) => {
         return params.data?.items
-          ?.map((it: any) => `[${it.size_code}] ${it.flavor_name}${it.free_topping && it.free_topping !== 'None' ? ` + ${it.free_topping}` : ''}`)
+          ?.map((it: any) => `[${it.size_code}] ${it.flavor_name}`)
           .join(', ') || '-';
       },
     },
@@ -148,9 +148,6 @@ export const OrderHistoryTable: React.FC<OrderHistoryTableProps> = ({
         return order.items?.some((it) =>
           it.toppings?.some((t) => t.topping_name === activeFilter.value)
         );
-      }
-      if (activeFilter.type === 'free') {
-        return order.items?.some((it) => it.free_topping === activeFilter.value);
       }
       if (activeFilter.type === 'payment') {
         return order.payment_type === activeFilter.value;

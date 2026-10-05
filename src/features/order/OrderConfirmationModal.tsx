@@ -86,7 +86,6 @@ export const OrderConfirmationModal: React.FC<OrderConfirmationModalProps> = ({
             <div key={idx} className="fc-confirm-item-line">
               <span>
                 <b>[{item.size_code}]</b> {item.flavor_name}
-                {item.free_topping && item.free_topping !== 'None' ? ` + ${item.free_topping}` : ''}
               </span>
               <span>{formatINR(item.price)}</span>
             </div>

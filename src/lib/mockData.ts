@@ -18,11 +18,6 @@ export const DEFAULT_MENU_ITEMS: MenuItem[] = [
   { id: 'topping-1', type: 'topping', name: 'Nachos', short_code: 'NCH', price: 60, is_active: true, sort_order: 1, color_hint: '#D48806' },
   { id: 'topping-2', type: 'topping', name: 'Extra Cheese', short_code: 'XC', price: 30, is_active: true, sort_order: 2, color_hint: '#FFC069' },
   { id: 'topping-3', type: 'topping', name: 'Kurkure', short_code: 'KK', price: 40, is_active: true, sort_order: 3, color_hint: '#CF1322' },
-
-  // Free Topping (Choose ONE only: Jalapeno / Olives / None)
-  { id: 'ftop-1', type: 'free_topping', name: 'Jalapeno', short_code: 'JAL', price: 0, is_active: true, sort_order: 1, color_hint: '#389E0D' },
-  { id: 'ftop-2', type: 'free_topping', name: 'Olives', short_code: 'OLV', price: 0, is_active: true, sort_order: 2, color_hint: '#262626' },
-  { id: 'ftop-3', type: 'free_topping', name: 'None', short_code: 'NON', price: 0, is_active: true, sort_order: 3, color_hint: '#8C8C8C' },
 ];
 
 export const DEFAULT_APP_SETTINGS: AppSettings = {
@@ -47,7 +42,6 @@ export function generateRealisticOrders(daysBack: number = 30): Order[] {
   const sizes = DEFAULT_MENU_ITEMS.filter((m) => m.type === 'size');
   const flavors = DEFAULT_MENU_ITEMS.filter((m) => m.type === 'flavor');
   const toppings = DEFAULT_MENU_ITEMS.filter((m) => m.type === 'topping');
-  const freeChoices: ('Jalapeno' | 'Olives' | 'None')[] = ['Jalapeno', 'Olives', 'None'];
 
   for (let d = daysBack; d >= 0; d--) {
     const targetDate = new Date(today);
@@ -106,7 +100,6 @@ export function generateRealisticOrders(daysBack: number = 30): Order[] {
       for (let b = 0; b < bowlCount; b++) {
         const size = sizes[Math.floor(Math.random() * sizes.length)];
         const flavor = flavors[Math.floor(Math.random() * flavors.length)];
-        const freeTop = freeChoices[Math.floor(Math.random() * freeChoices.length)];
 
         let bowlPrice = size.price;
         const bowlToppings: { id: string; topping_id: string; topping_name: string; price: number }[] = [];
@@ -132,7 +125,7 @@ export function generateRealisticOrders(daysBack: number = 30): Order[] {
           size_code: size.short_code,
           flavor_id: flavor.id,
           flavor_name: flavor.name,
-          free_topping: freeTop,
+          free_topping: 'None',
           price: bowlPrice,
           toppings: bowlToppings
         });

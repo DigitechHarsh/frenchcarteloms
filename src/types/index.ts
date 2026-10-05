@@ -34,7 +34,7 @@ export interface CartBowl {
   size_code: string;
   flavor_id: string;
   flavor_name: string;
-  free_topping: FreeToppingChoice;
+  free_topping?: FreeToppingChoice;
   toppings: BowlTopping[];
   bowl_unit_price: number;
   quantity: number;
@@ -48,7 +48,7 @@ export interface OrderItem {
   size_name: string;
   size_code: string;
   flavor_name: string;
-  free_topping: FreeToppingChoice;
+  free_topping?: FreeToppingChoice;
   price: number;
   toppings?: {
     id: string;

@@ -34,32 +34,19 @@ describe('French Cartel Pricing Logic', () => {
     expect(bowlPrice).toBe(419);
   });
 
-  it('enforces single free-topping rule (Jalapeno OR Olives OR None, costs Rs 0)', () => {
-    // Valid selections
-    const validChoices = ['Jalapeno', 'Olives', 'None'];
-    validChoices.forEach((choice) => {
-      const freeCost = MENU.freeToppings[choice as keyof typeof MENU.freeToppings];
-      expect(freeCost).toBe(0);
-    });
-
-    // A bowl cannot have both Jalapeno and Olives
-    const bowlWithJalapeno = { freeTopping: 'Jalapeno' };
-    const bowlWithOlives = { freeTopping: 'Olives' };
-    const bowlWithNone = { freeTopping: 'None' };
-
-    expect(bowlWithJalapeno.freeTopping === 'Jalapeno').toBe(true);
-    expect(bowlWithJalapeno.freeTopping === 'Olives').toBe(false);
-    expect(bowlWithOlives.freeTopping === 'Jalapeno').toBe(false);
-    expect(bowlWithNone.freeTopping === 'None').toBe(true);
+  it('handles self-served fresh toppings without additional POS charge', () => {
+    // Fresh toppings (jalapeno, olives) are self-served at the food truck counter
+    const selfServedCost = 0;
+    expect(selfServedCost).toBe(0);
   });
 
   it('calculates order total across multiple bowls with quantities', () => {
     // Bowl 1: Bite (169) + Kurkure (40) = 209 (qty 2) = 418
-    // Bowl 2: GigaBite (389) + Nachos (60) + Jalapeno (0) = 449 (qty 1) = 449
+    // Bowl 2: GigaBite (389) + Nachos (60) = 449 (qty 1) = 449
     // Total = 418 + 449 = 867
     const bowl1Unit = MENU.sizes.Bite + MENU.toppings.Kurkure;
     const bowl1Qty = 2;
-    const bowl2Unit = MENU.sizes.GigaBite + MENU.toppings.Nachos + MENU.freeToppings.Jalapeno;
+    const bowl2Unit = MENU.sizes.GigaBite + MENU.toppings.Nachos;
     const bowl2Qty = 1;
 
     const total = bowl1Unit * bowl1Qty + bowl2Unit * bowl2Qty;

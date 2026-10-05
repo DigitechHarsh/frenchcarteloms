@@ -211,7 +211,7 @@ export const useCartStore = create<CartState>((set, get) => ({
       selectedSize: size,
       selectedFlavor: flavor,
       selectedToppings: toppings,
-      selectedFreeTopping: bowl.free_topping,
+      selectedFreeTopping: (bowl.free_topping as FreeToppingChoice) || 'None',
       editingBowlId: bowl.id,
     });
   },

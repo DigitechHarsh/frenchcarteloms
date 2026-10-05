@@ -29,11 +29,6 @@ const SIZE_OPTIONS = [
   { value: 'GB', name: 'GigaBite', price: 389, label: '[GB] GigaBite — ₹389' },
 ];
 
-const FREE_TOPPING_OPTIONS = [
-  { value: 'None', label: 'None (No Free Topping)' },
-  { value: 'Jalapeno', label: 'Jalapeno' },
-  { value: 'Olives', label: 'Olives' },
-];
 
 const PAID_TOPPING_OPTIONS = [
   { value: 'Nachos', label: 'Nachos (+₹60)', price: 60, id: 'top-nachos' },
@@ -59,7 +54,6 @@ export const OrderPage: React.FC = () => {
   // 3. 1-Tap Touch Builder State
   const [selectedSizeCode, setSelectedSizeCode] = useState<string>('KB'); // Default KiloBite
   const [selectedFlavorName, setSelectedFlavorName] = useState<string>('Spicy Chipotle');
-  const [selectedFreeTopping, setSelectedFreeTopping] = useState<FreeToppingChoice>('None');
   const [selectedPaidToppings, setSelectedPaidToppings] = useState<string[]>([]);
   const [builderQuantity, setBuilderQuantity] = useState<number>(1);
 
@@ -113,7 +107,7 @@ export const OrderPage: React.FC = () => {
       size_code: currentSizeObj.value,
       flavor_id: `flavor-${selectedFlavorName.toLowerCase().replace(/\s+/g, '-')}`,
       flavor_name: selectedFlavorName,
-      free_topping: selectedFreeTopping,
+      free_topping: 'None',
       toppings: toppingsList,
       bowl_unit_price: currentBowlUnitPrice,
       quantity: builderQuantity,
@@ -125,7 +119,6 @@ export const OrderPage: React.FC = () => {
     // Reset builder for next bowl
     setBuilderQuantity(1);
     setSelectedPaidToppings([]);
-    setSelectedFreeTopping('None');
   };
 
   // Modify quantity of item in current ticket
@@ -150,7 +143,6 @@ export const OrderPage: React.FC = () => {
     setTicketBowls([]);
     setBuilderQuantity(1);
     setSelectedPaidToppings([]);
-    setSelectedFreeTopping('None');
     message.info('Form cleared');
   };
 
@@ -267,7 +259,7 @@ export const OrderPage: React.FC = () => {
             </div>
           </div>
 
-          {/* BOWL CONFIGURATION: ALL 4 SELECTIONS IN CLEAN DROPDOWNS (MAXIMUM SPACE UTILITY) */}
+          {/* BOWL CONFIGURATION: 3 CLEAN DROPDOWNS (MAXIMUM SPACE UTILITY) */}
           <div className="fc-dropdown-builder-grid">
             {/* 1. BOWL SIZE */}
             <div>
@@ -299,24 +291,9 @@ export const OrderPage: React.FC = () => {
               />
             </div>
 
-            {/* 3. FREE FRESH TOPPING */}
+            {/* 3. PAID ADD-ONS */}
             <div>
-              <span className="fc-touch-title">3. FREE FRESH TOPPING</span>
-              <Select
-                value={selectedFreeTopping}
-                onChange={(val) => setSelectedFreeTopping(val as FreeToppingChoice)}
-                options={FREE_TOPPING_OPTIONS.map((ft) => ({
-                  value: ft.value,
-                  label: ft.label,
-                }))}
-                style={{ width: '100%', height: 38 }}
-                size="middle"
-              />
-            </div>
-
-            {/* 4. PAID ADD-ONS */}
-            <div>
-              <span className="fc-touch-title">4. PAID ADD-ONS</span>
+              <span className="fc-touch-title">3. PAID ADD-ONS</span>
               <Select
                 mode="multiple"
                 allowClear
@@ -397,12 +374,7 @@ export const OrderPage: React.FC = () => {
                   </thead>
                   <tbody>
                     {ticketBowls.map((bowl) => {
-                      const toppingsSummary = [
-                        bowl.free_topping !== 'None' ? `${bowl.free_topping}` : null,
-                        ...bowl.toppings.map((t) => t.topping_name),
-                      ]
-                        .filter(Boolean)
-                        .join(', ');
+                      const toppingsSummary = bowl.toppings.map((t) => t.topping_name).join(', ');
 
                       return (
                         <tr key={bowl.id}>
@@ -596,7 +568,6 @@ export const OrderPage: React.FC = () => {
                                 order.items.map((it, idx) => (
                                   <span key={idx} style={{ marginRight: 6 }}>
                                     <b>[{it.size_code}]</b> {it.flavor_name}
-                                    {it.free_topping && it.free_topping !== 'None' ? ` (${it.free_topping})` : ''}
                                     {it.toppings && it.toppings.length > 0
                                       ? ` +${it.toppings.map((t) => t.topping_name).join(',')}`
                                       : ''}
@@ -684,7 +655,6 @@ export const OrderPage: React.FC = () => {
                                 order.items.map((it, idx) => (
                                   <span key={idx}>
                                     <b>[{it.size_code}]</b> {it.flavor_name}
-                                    {it.free_topping && it.free_topping !== 'None' ? ` (${it.free_topping})` : ''}
                                     {it.toppings && it.toppings.length > 0
                                       ? ` +${it.toppings.map((t) => t.topping_name).join(',')}`
                                       : ''}

@@ -130,12 +130,6 @@ export const CartSection: React.FC<CartSectionProps> = ({
                     🔥 <b>Flavor:</b> {bowl.flavor_name}
                   </div>
 
-                  {bowl.free_topping && bowl.free_topping !== 'None' && (
-                    <div className="fc-cart-bowl-freetop">
-                      ✨ <b>Free topping:</b> {bowl.free_topping}
-                    </div>
-                  )}
-
                   {bowl.toppings.length > 0 && (
                     <div className="fc-cart-bowl-toppings">
                       🧀 <b>Toppings:</b>{' '}

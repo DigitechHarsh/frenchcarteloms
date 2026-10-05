@@ -180,7 +180,6 @@ export const AdminPage: React.FC = () => {
     size: 'Bowl Size',
     flavor: 'Flavor',
     topping: 'Paid Add-on',
-    free_topping: 'Free Topping',
   };
 
   // Clean, Simple Menu Table Columns (No icons)
@@ -293,7 +292,6 @@ export const AdminPage: React.FC = () => {
                 <Radio.Button value="size">Bowl Sizes</Radio.Button>
                 <Radio.Button value="flavor">Flavors</Radio.Button>
                 <Radio.Button value="topping">Paid Add-ons</Radio.Button>
-                <Radio.Button value="free_topping">Free Toppings</Radio.Button>
               </Radio.Group>
             </div>
 
@@ -447,7 +445,6 @@ export const AdminPage: React.FC = () => {
                 { label: 'Bowl Size', value: 'size' },
                 { label: 'Flavor', value: 'flavor' },
                 { label: 'Paid Add-on', value: 'topping' },
-                { label: 'Free Topping', value: 'free_topping' },
               ]}
             />
           </Form.Item>

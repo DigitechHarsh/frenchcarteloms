@@ -122,12 +122,6 @@ export const OrderDetailDrawer: React.FC<OrderDetailDrawerProps> = ({
               🔥 <b>Flavor:</b> {item.flavor_name}
             </div>
 
-            {item.free_topping && item.free_topping !== 'None' && (
-              <div style={{ fontSize: 12, color: '#389E0D', marginTop: 2 }}>
-                🌿 <b>Free Topping:</b> {item.free_topping}
-              </div>
-            )}
-
             {item.toppings && item.toppings.length > 0 && (
               <div style={{ fontSize: 12, color: '#D46B08', marginTop: 2 }}>
                 🧀 <b>Toppings:</b> {item.toppings.map((t) => `${t.topping_name} (+${formatINR(t.price)})`).join(', ')}

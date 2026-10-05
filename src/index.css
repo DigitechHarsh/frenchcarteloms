@@ -2149,7 +2149,13 @@ body {
   gap: 8px;
 }
 
-.fc-dropdown-builder-grid,
+.fc-dropdown-builder-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
 .fc-dropdown-toppings-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -2157,8 +2163,14 @@ body {
   margin-bottom: 14px;
 }
 
+@media (max-width: 768px) {
+  .fc-dropdown-builder-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
+
 @media (max-width: 600px) {
-  .fc-dropdown-builder-grid,
   .fc-dropdown-toppings-row {
     grid-template-columns: 1fr;
     gap: 10px;
