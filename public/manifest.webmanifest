@@ -1,0 +1,24 @@
+{
+  "name": "French Cartel - Food Truck OMS",
+  "short_name": "French Cartel",
+  "description": "Order Management System & Digital Kitchen Board for French Cartel Food Truck",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1A1614",
+  "theme_color": "#E65100",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
