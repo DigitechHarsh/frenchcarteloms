@@ -2117,6 +2117,9 @@ body {
   text-transform: uppercase;
   margin-bottom: 6px;
   display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .fc-touch-grid-4 {
@@ -2151,7 +2154,7 @@ body {
 
 .fc-dropdown-builder-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
   margin-bottom: 14px;
 }
@@ -2163,7 +2166,7 @@ body {
   margin-bottom: 14px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 850px) {
   .fc-dropdown-builder-grid {
     grid-template-columns: 1fr;
     gap: 10px;

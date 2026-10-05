@@ -291,13 +291,13 @@ export const OrderPage: React.FC = () => {
               />
             </div>
 
-            {/* 3. PAID ADD-ONS */}
+            {/* 3. ADD-ONS */}
             <div>
-              <span className="fc-touch-title">3. PAID ADD-ONS</span>
+              <span className="fc-touch-title">3. ADD-ONS</span>
               <Select
                 mode="multiple"
                 allowClear
-                placeholder="None (Tap to add)"
+                placeholder="Add-ons (optional)"
                 value={selectedPaidToppings}
                 onChange={(vals) => setSelectedPaidToppings(vals as string[])}
                 options={PAID_TOPPING_OPTIONS.map((pt) => ({

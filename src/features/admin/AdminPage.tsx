@@ -179,7 +179,7 @@ export const AdminPage: React.FC = () => {
   const categoryLabels: Record<string, string> = {
     size: 'Bowl Size',
     flavor: 'Flavor',
-    topping: 'Paid Add-on',
+    topping: 'Add-on',
   };
 
   // Clean, Simple Menu Table Columns (No icons)
@@ -291,7 +291,7 @@ export const AdminPage: React.FC = () => {
                 <Radio.Button value="all">All Items ({menuItems.length})</Radio.Button>
                 <Radio.Button value="size">Bowl Sizes</Radio.Button>
                 <Radio.Button value="flavor">Flavors</Radio.Button>
-                <Radio.Button value="topping">Paid Add-ons</Radio.Button>
+                <Radio.Button value="topping">Add-ons</Radio.Button>
               </Radio.Group>
             </div>
 
@@ -444,7 +444,7 @@ export const AdminPage: React.FC = () => {
               options={[
                 { label: 'Bowl Size', value: 'size' },
                 { label: 'Flavor', value: 'flavor' },
-                { label: 'Paid Add-on', value: 'topping' },
+                { label: 'Add-on', value: 'topping' },
               ]}
             />
           </Form.Item>
